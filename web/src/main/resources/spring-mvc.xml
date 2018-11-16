@@ -25,4 +25,26 @@
     <!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
     <mvc:default-servlet-handler />
 
+    <!-- 控制器异常处理 -->
+    <bean id="handlerExceptionResolver" class="exceptionhandle.AnnotationHandlerMethodExceptionResolver">
+        <property name="messageConverters">
+            <list>
+                <!-- 对声明@ResponseBody -->
+                <ref bean="fastJsonHttpMessageConverter" />
+
+                <!-- StringHttpMessageConverter编码为UTF-8，防止乱码 -->
+                <ref bean="stringHttpMessageConverter" />
+            </list>
+        </property>
+        <property name="exceptionMappings">
+            <list>
+                <!-- 框架会自动捕获指定的异常类，并返回异常类的 getMessage()的提示信息 -->
+                <!--<bean class="com.sf.erui.common.exception.SfopenRuntimeException"></bean> -->
+                <!-- 可以根据业务需求添加多个 ,没有的指定的异常类默认都提示系统异常 -->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"></bean>
+    <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter"></bean>
 </beans>
