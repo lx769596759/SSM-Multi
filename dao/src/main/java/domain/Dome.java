@@ -1,7 +1,17 @@
 package domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "Dome", description = "人员pojo")
 public class Dome {
+
+    // 字段注解
+    @ApiModelProperty(value = "姓名", name = "name", required = true, example = "张珊")
     private String name;
+
+    // 字段注解
+    @ApiModelProperty(value = "年龄", name = "name", required = true, example = "20")
     private String age;
 
     public String getName() {
