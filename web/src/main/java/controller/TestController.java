@@ -2,6 +2,7 @@ package controller;
 
 import common.response.Response;
 import common.response.ResponseHelper;
+import domain.Goods;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -25,6 +26,11 @@ public class TestController {
     @ApiOperation(value = "查询用户", notes = "查询用户详细信息，姓名+年龄", httpMethod = "GET", produces = MediaType.APPLICATION_JSON_VALUE)
     public Response helloWorld() {
         String userInfo = testService.getNameAndAge();
+
+        Goods goods = new Goods();
+        goods.setName("辣条");
+        goods.setPrice("4.5元");
+        System.out.println(goods.toString());
         return ResponseHelper.buildOk(userInfo);
     }
 }
